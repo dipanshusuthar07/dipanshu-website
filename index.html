@@ -5,23 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipanshu Suthar | Pianist</title>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #0f172a, #1e293b, #020617);
   color: white;
   text-align: center;
-  overflow-x: hidden;
-}
-
-/* 🌌 Particles */
-#particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
 }
 
 /* Header */
@@ -31,49 +21,46 @@ header {
 
 /* Typing */
 #typing {
-  font-size: 2.8em;
+  font-size: 2.5em;
   font-weight: bold;
 }
 
-/* Floating Image */
+/* Image */
 img {
-  width: 260px;
+  width: 250px;
   border-radius: 20px;
   margin-top: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
 
 /* Section */
 .section {
-  padding: 40px 20px;
+  padding: 30px;
 }
 
-/* Glass Card */
+/* Cards */
 .card {
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  padding: 25px;
-  border-radius: 20px;
+  padding: 20px;
+  border-radius: 15px;
   margin: 20px auto;
   width: 85%;
   max-width: 500px;
   transition: 0.4s;
 }
 
-/* Card Hover */
+/* Hover */
 .card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  transform: translateY(-10px);
 }
 
-/* Fade Animation */
+/* Fade */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -90,44 +77,22 @@ img {
   display: inline-block;
   padding: 12px 25px;
   margin: 10px;
-  border-radius: 30px;
+  border-radius: 25px;
   text-decoration: none;
   color: white;
-  font-weight: bold;
-  background: linear-gradient(45deg, #3b82f6, #06b6d4);
+  background: #3b82f6;
   transition: 0.3s;
-  animation: pulse 2s infinite;
 }
 
 .btn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 20px rgba(59,130,246,0.9);
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(59,130,246,0); }
-  100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
-}
-
-/* Cursor */
-.cursor {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: fixed;
-  background: #3b82f6;
-  pointer-events: none;
-  box-shadow: 0 0 20px #3b82f6;
-  transform: translate(-50%, -50%);
-  z-index: 999;
+  transform: scale(1.1);
+  background: #2563eb;
 }
 
 /* Footer */
 footer {
   margin-top: 40px;
   padding: 20px;
-  font-size: 0.9em;
   color: #94a3b8;
 }
 </style>
@@ -135,13 +100,10 @@ footer {
 
 <body>
 
-<div id="particles-js"></div>
-<div class="cursor"></div>
-
 <header>
   <div id="typing"></div>
-  <p>Musician | School Council Member</p>
-  <img src="your-photo.png" alt="Dipanshu">
+  <p>Musician | Best Pianist of Kalorex Future School 😏</p>
+  <img src="your-photo.png">
 </header>
 
 <div class="section">
@@ -150,35 +112,30 @@ footer {
     <h2>About Me</h2>
     <p>
       I am a passionate pianist who loves playing on Casio keyboard.
-      Along with music, I proudly serve as a School Council Member,
-      balancing creativity with responsibility.
+      I also serve as a School Council Member.
     </p>
 
     <p>
-      I am a passionate pianist from India who loves performing and expressing emotions through music.
-      If you are organizing a concert, event, or show and need a pianist, feel free to contact me.
-      I am open to performing across India.
+      If you are organizing a concert, event, or show and need a pianist,
+      feel free to contact me. I am available across India.
     </p>
   </div>
 
   <div class="card fade">
     <h2>Skills</h2>
-    <p>🎹 Keyboard Playing<br>🎵 Music Learning<br>🏓 Table Tennis</p>
+    <p>🎹 Keyboard<br>🎵 Music<br>🏓 Table Tennis</p>
   </div>
 
   <div class="card fade">
     <h2>Contact</h2>
-
-    <a href="mailto:dipanshusuthar07@gmail.com" class="btn">📧 Email Me</a>
-    <a href="https://wa.me/918469621442" class="btn">💬 WhatsApp Me</a>
-
-    <p>Phone: 8469621442</p>
+    <a href="mailto:dipanshusuthar07@gmail.com" class="btn">Email Me</a>
+    <a href="https://wa.me/918469621442" class="btn">WhatsApp</a>
   </div>
 
 </div>
 
 <footer>
-  © 2026 Dipanshu Suthar | All Rights Reserved
+  © 2026 Dipanshu Suthar
 </footer>
 
 <script>
@@ -198,31 +155,13 @@ type();
 const fades = document.querySelectorAll('.fade');
 function showOnScroll() {
   fades.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
       el.classList.add('show');
     }
   });
 }
 window.addEventListener('scroll', showOnScroll);
 showOnScroll();
-
-// Cursor
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove", e => {
-  cursor.style.top = e.clientY + "px";
-  cursor.style.left = e.clientX + "px";
-});
-
-// Particles
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80 },
-    size: { value: 3 },
-    move: { speed: 2 },
-    line_linked: { enable: true }
-  }
-});
 </script>
 
 </body>
