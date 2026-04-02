@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipanshu Suthar | Pianist</title>
 
-<meta name="description" content="Dipanshu Suthar - Pianist and School Council Member. Available for concerts and events across India.">
+<meta name="description" content="Dipanshu Suthar - Pianist and School Council Member. Available for concerts across India.">
 
 <style>
 html { scroll-behavior: smooth; }
@@ -37,8 +37,18 @@ header {
   padding: 40px 20px;
 }
 
-h1 {
+#typing {
   font-size: 2.5em;
+  font-weight: bold;
+}
+
+#typing::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 img {
@@ -60,6 +70,11 @@ img {
   margin: 20px auto;
   width: 85%;
   max-width: 500px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
 }
 
 /* Buttons */
@@ -71,9 +86,15 @@ img {
   text-decoration: none;
   color: white;
   background: #3b82f6;
+  transition: 0.3s;
 }
 
-/* Chat Button */
+.btn:hover {
+  transform: scale(1.1);
+  background: #2563eb;
+}
+
+/* Chat */
 #chat-btn {
   position: fixed;
   bottom: 20px;
@@ -84,7 +105,6 @@ img {
   cursor: pointer;
 }
 
-/* Chatbox */
 #chatbox {
   position: fixed;
   bottom: 80px;
@@ -93,7 +113,6 @@ img {
   background: #1e293b;
   border-radius: 10px;
   display: none;
-  overflow: hidden;
 }
 
 #chat-header {
@@ -126,8 +145,12 @@ img {
 </nav>
 
 <header id="home">
-  <h1>Dipanshu Suthar 🎹</h1>
-  <p>🎹 Best Pianist of Kalorex Future School</p>
+  <div id="typing"></div>
+
+  <p style="color:#60a5fa;">🎹 Best Pianist of Kalorex Future School</p>
+
+  <p>Musician | School Council Member</p>
+
   <img src="your-photo.png">
 </header>
 
@@ -175,7 +198,20 @@ img {
   <input type="text" id="chat-input" placeholder="Ask something...">
 </div>
 
-  <script>
+<script>
+// Typing
+const text = "Dipanshu Suthar 🎹";
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 80);
+  }
+}
+type();
+
+// Chatbot
 const btn = document.getElementById("chat-btn");
 const box = document.getElementById("chatbox");
 const input = document.getElementById("chat-input");
@@ -185,76 +221,34 @@ btn.onclick = () => {
   box.style.display = box.style.display === "none" ? "block" : "none";
 };
 
-// Random reply helper
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Smart reply
 function getReply(text) {
   text = text.toLowerCase();
 
-  if (text.includes("hi") || text.includes("hello")) {
-    return random([
-      "Hey 👋 how can I help?",
-      "Hello there 😎",
-      "Hi! Ask me anything about Dipanshu 🎹"
-    ]);
-  }
+  if (text.includes("hi") || text.includes("hello"))
+    return random(["Hello 👋", "Hey 😎", "Hi there!"]);
 
-  if (text.includes("dipanshu") || text.includes("who")) {
-    return random([
-      "Dipanshu is a talented pianist 🎹",
-      "He is a musician and School Council Member 😎",
-      "A passionate keyboard player who loves music 🎶"
-    ]);
-  }
+  if (text.includes("dipanshu"))
+    return random(["He is a talented pianist 🎹", "A musician and student 😎"]);
 
-  if (text.includes("piano") || text.includes("music")) {
-    return random([
-      "He loves playing Casio keyboard 🎹",
-      "Music is his passion 🎶",
-      "He performs in events and shows 😏"
-    ]);
-  }
+  if (text.includes("piano"))
+    return random(["He loves Casio keyboard 🎶", "Music is his passion"]);
 
-  if (text.includes("contact") || text.includes("email")) {
-    return random([
-      "You can contact him at: dipanshusuthar07@gmail.com 📧",
-      "Reach him via email: dipanshusuthar07@gmail.com 😎",
-      "Email him here 👉 dipanshusuthar07@gmail.com"
-    ]);
-  }
+  if (text.includes("contact") || text.includes("email"))
+    return "Email: dipanshusuthar07@gmail.com 📧";
 
-  if (text.includes("hire") || text.includes("concert") || text.includes("show")) {
-    return random([
-      "Yes! He is available for concerts 🎹",
-      "You can hire him for events across India 😏",
-      "Perfect for live shows and performances 🔥"
-    ]);
-  }
+  if (text.includes("hire"))
+    return "Available for concerts across India 🎹";
 
-  if (text.includes("skills")) {
-    return random([
-      "Keyboard 🎹, Music 🎵, Table Tennis 🏓",
-      "He is skilled in piano and sports 😎",
-      "Music + TT = perfect combo 💥"
-    ]);
-  }
-
-  // fallback replies
-  return random([
-    "Hmm 🤔 try asking about piano or contact",
-    "I am still learning 😅 ask something else",
-    "Try 'Who is Dipanshu?' or 'Contact' 😎"
-  ]);
+  return random(["Ask about piano 🎹", "Try 'contact' 😎"]);
 }
 
-// Handle input
 input.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     let userText = input.value;
-
     messages.innerHTML += "<div>🧑: " + userText + "</div>";
 
     let reply = getReply(userText);
