@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipanshu Suthar | Pianist</title>
 
+<!-- SEO -->
+<meta name="description" content="Dipanshu Suthar is one of the best young pianists of Kalorex Future School, known for Casio keyboard performances and live shows in India.">
+
 <style>
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -14,15 +21,60 @@ body {
   text-align: center;
 }
 
-/* Header */
-header {
-  padding: 60px 20px;
+/* 🔝 Progress Bar */
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: #3b82f6;
+  width: 0%;
+  z-index: 999;
 }
 
-/* Typing */
-#typing {
+/* 🧭 Navbar */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  z-index: 998;
+}
+
+nav a {
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #3b82f6;
+  left: 0;
+  bottom: -3px;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Header */
+header {
+  padding: 50px 20px;
+}
+
+/* Gradient Name */
+.gradient-text {
+  background: linear-gradient(45deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  color: transparent;
   font-size: 2.5em;
-  font-weight: bold;
 }
 
 /* Image */
@@ -30,16 +82,9 @@ img {
   width: 250px;
   border-radius: 20px;
   margin-top: 20px;
-  animation: float 3s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* Section */
+/* Sections */
 .section {
   padding: 30px;
 }
@@ -52,30 +97,17 @@ img {
   margin: 20px auto;
   width: 85%;
   max-width: 500px;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
-/* Hover */
 .card:hover {
   transform: translateY(-10px);
-}
-
-/* Fade */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 1s;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: 12px 25px;
+  padding: 10px 20px;
   margin: 10px;
   border-radius: 25px;
   text-decoration: none;
@@ -100,35 +132,69 @@ footer {
 
 <body>
 
-<header>
-  <div id="typing"></div>
-  <p>Musician | Best Pianist of Kalorex Future School 😏</p>
+<div id="progress"></div>
+
+<!-- Navbar -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#achievements">Achievements</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<header id="home">
+  <h1 class="gradient-text">Dipanshu Suthar 🎹</h1>
+
+  <p style="color:#60a5fa;">🎹 Best Pianist of Kalorex Future School</p>
+
+  <p>Musician | School Council Member</p>
+
   <img src="your-photo.png">
 </header>
 
 <div class="section">
 
-  <div class="card fade">
+  <!-- About -->
+  <div class="card" id="about">
     <h2>About Me</h2>
     <p>
       I am a passionate pianist who loves playing on Casio keyboard.
       I also serve as a School Council Member.
     </p>
-
     <p>
       If you are organizing a concert, event, or show and need a pianist,
       feel free to contact me. I am available across India.
     </p>
   </div>
 
-  <div class="card fade">
+  <!-- Skills -->
+  <div class="card">
     <h2>Skills</h2>
     <p>🎹 Keyboard<br>🎵 Music<br>🏓 Table Tennis</p>
   </div>
 
-  <div class="card fade">
+  <!-- Achievements -->
+  <div class="card" id="achievements">
+    <h2>Achievements</h2>
+    <p>
+      🏆 Performed in School Events<br>
+      🎹 Recognized for Piano Skills<br>
+      🏅 School Council Member
+    </p>
+  </div>
+
+  <!-- Hire Me -->
+  <div class="card">
+    <h2>Hire Me</h2>
+    <p>
+      Available for concerts, events, and shows across India.
+    </p>
+  </div>
+
+  <!-- Contact -->
+  <div class="card" id="contact">
     <h2>Contact</h2>
-    <a href="mailto:dipanshusuthar07@gmail.com" class="btn">Email Me</a>
+    <a href="mailto:dipanshusuthar07@gmail.com" class="btn">Email</a>
     <a href="https://wa.me/918469621442" class="btn">WhatsApp</a>
   </div>
 
@@ -139,29 +205,12 @@ footer {
 </footer>
 
 <script>
-// Typing
-const text = "Dipanshu Suthar 🎹";
-let i = 0;
-function type() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 80);
-  }
-}
-type();
-
-// Scroll Animation
-const fades = document.querySelectorAll('.fade');
-function showOnScroll() {
-  fades.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-      el.classList.add('show');
-    }
-  });
-}
-window.addEventListener('scroll', showOnScroll);
-showOnScroll();
+// Progress bar
+window.onscroll = () => {
+  let winScroll = document.documentElement.scrollTop;
+  let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById("progress").style.width = (winScroll / height) * 100 + "%";
+};
 </script>
 
 </body>
