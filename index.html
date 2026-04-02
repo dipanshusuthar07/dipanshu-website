@@ -1,185 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dipanshu Suthar | Pianist</title>
-
+<title>Test</title>
 <style>
-* { box-sizing: border-box; }
+body { background:black; color:white; text-align:center; }
 
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
-  text-align: center;
-}
-
-/* Header */
-header {
-  padding: 40px;
-}
-
-#typing {
-  font-size: 2.2em;
-  font-weight: bold;
-}
-
-/* Chat Button */
 #chat-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #3b82f6;
-  padding: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1000;
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:blue;
+ padding:10px;
 }
 
-/* Chat Page */
 #chat-page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0f172a;
-  display: none;
-  flex-direction: column;
-  z-index: 9999;
-}
-
-/* Header */
-#chat-header {
-  background: #3b82f6;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Messages */
-#chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Bubbles */
-.user {
-  align-self: flex-end;
-  background: #3b82f6;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
-}
-
-.bot {
-  align-self: flex-start;
-  background: #1e293b;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 70%;
-}
-
-/* Input */
-#chat-input {
-  width: 100%;
-  padding: 15px;
-  border: none;
-  outline: none;
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:black;
+ display:none;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div id="typing"></div>
-  <p>Best Pianist of Kalorex Future School</p>
-</header>
+<h1>TEST WORKING</h1>
 
-<div id="chat-btn">Chat</div>
+<div id="chat-btn">Open</div>
 
 <div id="chat-page">
-  <div id="chat-header">
-    AI Assistant
-    <span id="close-chat" style="cursor:pointer;">Close</span>
-  </div>
-
-  <div id="chat-messages"></div>
-
-  <input id="chat-input" placeholder="Type a message...">
+  <h2>Chat Opened</h2>
 </div>
 
 <script>
-// Typing Animation
-const text = "Dipanshu Suthar 🎹";
-let i = 0;
-function type() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 80);
-  }
-}
-type();
-
-// Chat Logic
-const btn = document.getElementById("chat-btn");
-const page = document.getElementById("chat-page");
-const closeBtn = document.getElementById("close-chat");
-const input = document.getElementById("chat-input");
-const messages = document.getElementById("chat-messages");
-
-btn.onclick = () => page.style.display = "flex";
-closeBtn.onclick = () => page.style.display = "none";
-
-function addMessage(text, type) {
-  let div = document.createElement("div");
-  div.className = type;
-  div.innerText = text;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-}
-
-function getReply(text) {
-  text = text.toLowerCase();
-
-  if (text.includes("name") || text.includes("who"))
-    return "Dipanshu Suthar is a talented pianist.";
-
-  if (text.includes("skill") || text.includes("music"))
-    return "He plays keyboard and performs music.";
-
-  if (text.includes("contact") || text.includes("email"))
-    return "Email: dipanshusuthar07@gmail.com";
-
-  if (text.includes("hire") || text.includes("concert"))
-    return "Available for events across India.";
-
-  return "Ask about piano, skills, or contact.";
-}
-
-input.addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    let text = input.value;
-
-    addMessage(text, "user");
-
-    let reply = getReply(text);
-
-    setTimeout(() => {
-      addMessage(reply, "bot");
-    }, 400);
-
-    input.value = "";
-  }
-});
+document.getElementById("chat-btn").onclick = () => {
+ document.getElementById("chat-page").style.display = "block";
+};
 </script>
 
 </body>
