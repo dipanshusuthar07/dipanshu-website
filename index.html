@@ -1,79 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="keywords" content="Dipanshu Suthar pianist, best pianist Kalorex, piano India">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipanshu Suthar | Pianist</title>
 
-<style>
-html { scroll-behavior: smooth; }
+<meta name="description" content="Dipanshu Suthar - Pianist, available for concerts and events across India.">
 
+<style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial;
   background: #0f172a;
   color: white;
   text-align: center;
 }
 
-/* Navbar */
-nav {
-  position: sticky;
-  top: 0;
-  background: #020617;
-  padding: 10px;
-}
-
-nav a {
-  margin: 0 15px;
-  color: white;
-  text-decoration: none;
-}
-
-/* Header */
-header { padding: 40px; }
-
-#typing {
-  font-size: 2.5em;
-  font-weight: bold;
-}
-
-#typing::after {
-  content: "|";
-  animation: blink 1s infinite;
-}
-
-@keyframes blink { 50% { opacity: 0; } }
-
-img {
-  width: 220px;
-  border-radius: 20px;
-  margin-top: 20px;
-}
-
-/* Sections */
-.section { padding: 30px; }
-
-/* Cards */
-.card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px auto;
-  width: 85%;
-  max-width: 500px;
-}
-
-/* Buttons */
-.btn {
-  padding: 10px 20px;
-  background: #3b82f6;
-  border-radius: 20px;
-  color: white;
-  text-decoration: none;
-}
-
-/* Chat Button */
+/* Chat UI same as before */
 #chat-btn {
   position: fixed;
   bottom: 20px;
@@ -84,7 +28,6 @@ img {
   cursor: pointer;
 }
 
-/* Full Chat Page */
 #chat-page {
   position: fixed;
   top: 0;
@@ -96,7 +39,6 @@ img {
   flex-direction: column;
 }
 
-/* Chat Header */
 #chat-header {
   background: #3b82f6;
   padding: 15px;
@@ -104,23 +46,20 @@ img {
   justify-content: space-between;
 }
 
-/* Chat messages */
 #chat-messages {
   flex: 1;
-  padding: 15px;
+  padding: 10px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Bubbles */
 .user {
   align-self: flex-end;
   background: #3b82f6;
   padding: 10px;
   border-radius: 10px;
-  max-width: 70%;
 }
 
 .bot {
@@ -128,59 +67,29 @@ img {
   background: #1e293b;
   padding: 10px;
   border-radius: 10px;
-  max-width: 70%;
 }
 
-/* Thinking */
-.thinking {
-  font-style: italic;
-  opacity: 0.7;
-}
-
-/* Input */
 #chat-input {
   padding: 15px;
   border: none;
-  outline: none;
+}
+
+#mic {
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-</nav>
+<h1>Dipanshu Suthar 🎹</h1>
+<p>Best Pianist of Kalorex Future School</p>
 
-<header id="home">
-  <div id="typing"></div>
-  <p>Best Pianist of Kalorex Future School</p>
-  <img src="your-photo.png">
-</header>
-
-<div class="section">
-  <div class="card" id="about">
-    <h2>About</h2>
-    <p>I am a passionate pianist and School Council Member.</p>
-  </div>
-
-  <div class="card">
-    <h2>Skills</h2>
-    <p>Keyboard, Music, Table Tennis</p>
-  </div>
-
-  <div class="card">
-    <h2>Contact</h2>
-    <a href="mailto:dipanshusuthar07@gmail.com" class="btn">Email</a>
-  </div>
-</div>
-
-<!-- Chat Button -->
 <div id="chat-btn">Chat</div>
 
-<!-- Chat Page -->
 <div id="chat-page">
   <div id="chat-header">
     AI Assistant
@@ -188,86 +97,85 @@ img {
   </div>
 
   <div id="chat-messages"></div>
-  <input id="chat-input" placeholder="Type a message...">
+
+  <div style="position:relative;">
+    <input id="chat-input" placeholder="Type a message...">
+    <span id="mic">🎤</span>
+  </div>
 </div>
 
 <script>
-// Typing
-const text = "Dipanshu Suthar";
-let i = 0;
-function type() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type, 80);
-  }
-}
-type();
-
-// Chat
+// OPEN CLOSE
 const btn = document.getElementById("chat-btn");
 const page = document.getElementById("chat-page");
 const closeBtn = document.getElementById("close-chat");
+
+btn.onclick = () => page.style.display = "flex";
+closeBtn.onclick = () => page.style.display = "none";
+
+// UI
 const input = document.getElementById("chat-input");
 const messages = document.getElementById("chat-messages");
 
-let userName = "";
-
-btn.onclick = () => {
-  page.style.display = "flex";
-
-  if (messages.innerHTML === "") {
-    addMessage("Hello, I am Dipanshu's assistant. What is your name?", "bot");
-  }
-};
-
-closeBtn.onclick = () => page.style.display = "none";
-
-function addMessage(text, type, cls="") {
+function addMessage(text, type) {
   let div = document.createElement("div");
-  div.className = type + " " + cls;
+  div.className = type;
   div.innerText = text;
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
 }
 
-function delay(ms) {
-  return new Promise(res => setTimeout(res, ms));
-}
-
-async function getReply(text) {
+// BETTER AI LOGIC 🔥
+function getReply(text) {
   text = text.toLowerCase();
 
-  if (!userName) {
-    userName = text;
-    return "Nice to meet you, " + userName + ". How can I help you?";
-  }
+  if (text.includes("name") || text.includes("who"))
+    return "Dipanshu Suthar is a talented pianist and performer.";
 
-  if (text.includes("piano"))
-    return "Dipanshu is passionate about playing keyboard and performing.";
+  if (text.includes("skill") || text.includes("play") || text.includes("music"))
+    return "He plays keyboard, performs music, and also enjoys table tennis.";
 
-  if (text.includes("contact"))
-    return "Email: dipanshusuthar07@gmail.com";
+  if (text.includes("contact") || text.includes("email") || text.includes("address"))
+    return "You can contact him at dipanshusuthar07@gmail.com";
 
-  return "You can ask about piano, skills or contact.";
+  if (text.includes("hire") || text.includes("concert") || text.includes("show"))
+    return "He is available for concerts and events across India.";
+
+  return "I understand your question, but I can best help with music, skills or contact.";
 }
 
-input.addEventListener("keypress", async function(e) {
+// VOICE AI 🔥
+const mic = document.getElementById("mic");
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+mic.onclick = () => {
+  recognition.start();
+};
+
+recognition.onresult = function(event) {
+  let voiceText = event.results[0][0].transcript;
+  input.value = voiceText;
+};
+
+// TEXT TO SPEECH
+function speak(text) {
+  let speech = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(speech);
+}
+
+// SEND
+input.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     let text = input.value;
+
     addMessage(text, "user");
 
-    addMessage("Thinking...", "bot", "thinking");
+    let reply = getReply(text);
 
-    let thinking = document.querySelector(".thinking");
-
-    let reply = await getReply(text);
-
-    await delay(600);
-
-    thinking.remove();
-
-    addMessage(reply, "bot");
+    setTimeout(() => {
+      addMessage(reply, "bot");
+      speak(reply); // voice reply 🔥
+    }, 400);
 
     input.value = "";
   }
