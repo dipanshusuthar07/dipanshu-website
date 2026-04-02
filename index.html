@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="keywords" content="Dipanshu Suthar pianist, best pianist Kalorex, piano India">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipanshu Suthar | Pianist</title>
 
-<meta name="description" content="Dipanshu Suthar - Pianist, available for concerts and events across India.">
-
 <style>
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: Arial;
@@ -17,7 +16,17 @@ body {
   text-align: center;
 }
 
-/* Chat UI same as before */
+/* Header */
+header {
+  padding: 40px;
+}
+
+#typing {
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+/* Chat Button */
 #chat-btn {
   position: fixed;
   bottom: 20px;
@@ -26,8 +35,10 @@ body {
   padding: 15px;
   border-radius: 50%;
   cursor: pointer;
+  z-index: 1000;
 }
 
+/* Chat Page */
 #chat-page {
   position: fixed;
   top: 0;
@@ -37,8 +48,10 @@ body {
   background: #0f172a;
   display: none;
   flex-direction: column;
+  z-index: 9999;
 }
 
+/* Header */
 #chat-header {
   background: #3b82f6;
   padding: 15px;
@@ -46,6 +59,7 @@ body {
   justify-content: space-between;
 }
 
+/* Messages */
 #chat-messages {
   flex: 1;
   padding: 10px;
@@ -55,11 +69,13 @@ body {
   gap: 10px;
 }
 
+/* Bubbles */
 .user {
   align-self: flex-end;
   background: #3b82f6;
   padding: 10px;
   border-radius: 10px;
+  max-width: 70%;
 }
 
 .bot {
@@ -67,55 +83,61 @@ body {
   background: #1e293b;
   padding: 10px;
   border-radius: 10px;
+  max-width: 70%;
 }
 
+/* Input */
 #chat-input {
+  width: 100%;
   padding: 15px;
   border: none;
-}
-
-#mic {
-  position: absolute;
-  right: 10px;
-  bottom: 15px;
-  cursor: pointer;
+  outline: none;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Dipanshu Suthar 🎹</h1>
-<p>Best Pianist of Kalorex Future School</p>
+<header>
+  <div id="typing"></div>
+  <p>Best Pianist of Kalorex Future School</p>
+</header>
 
 <div id="chat-btn">Chat</div>
 
 <div id="chat-page">
   <div id="chat-header">
     AI Assistant
-    <span id="close-chat">Close</span>
+    <span id="close-chat" style="cursor:pointer;">Close</span>
   </div>
 
   <div id="chat-messages"></div>
 
-  <div style="position:relative;">
-    <input id="chat-input" placeholder="Type a message...">
-    <span id="mic">🎤</span>
-  </div>
+  <input id="chat-input" placeholder="Type a message...">
 </div>
 
 <script>
-// OPEN CLOSE
+// Typing Animation
+const text = "Dipanshu Suthar 🎹";
+let i = 0;
+function type() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 80);
+  }
+}
+type();
+
+// Chat Logic
 const btn = document.getElementById("chat-btn");
 const page = document.getElementById("chat-page");
 const closeBtn = document.getElementById("close-chat");
+const input = document.getElementById("chat-input");
+const messages = document.getElementById("chat-messages");
 
 btn.onclick = () => page.style.display = "flex";
 closeBtn.onclick = () => page.style.display = "none";
-
-// UI
-const input = document.getElementById("chat-input");
-const messages = document.getElementById("chat-messages");
 
 function addMessage(text, type) {
   let div = document.createElement("div");
@@ -125,45 +147,24 @@ function addMessage(text, type) {
   messages.scrollTop = messages.scrollHeight;
 }
 
-// BETTER AI LOGIC 🔥
 function getReply(text) {
   text = text.toLowerCase();
 
   if (text.includes("name") || text.includes("who"))
-    return "Dipanshu Suthar is a talented pianist and performer.";
+    return "Dipanshu Suthar is a talented pianist.";
 
-  if (text.includes("skill") || text.includes("play") || text.includes("music"))
-    return "He plays keyboard, performs music, and also enjoys table tennis.";
+  if (text.includes("skill") || text.includes("music"))
+    return "He plays keyboard and performs music.";
 
-  if (text.includes("contact") || text.includes("email") || text.includes("address"))
-    return "You can contact him at dipanshusuthar07@gmail.com";
+  if (text.includes("contact") || text.includes("email"))
+    return "Email: dipanshusuthar07@gmail.com";
 
-  if (text.includes("hire") || text.includes("concert") || text.includes("show"))
-    return "He is available for concerts and events across India.";
+  if (text.includes("hire") || text.includes("concert"))
+    return "Available for events across India.";
 
-  return "I understand your question, but I can best help with music, skills or contact.";
+  return "Ask about piano, skills, or contact.";
 }
 
-// VOICE AI 🔥
-const mic = document.getElementById("mic");
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-mic.onclick = () => {
-  recognition.start();
-};
-
-recognition.onresult = function(event) {
-  let voiceText = event.results[0][0].transcript;
-  input.value = voiceText;
-};
-
-// TEXT TO SPEECH
-function speak(text) {
-  let speech = new SpeechSynthesisUtterance(text);
-  speechSynthesis.speak(speech);
-}
-
-// SEND
 input.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     let text = input.value;
@@ -174,7 +175,6 @@ input.addEventListener("keypress", function(e) {
 
     setTimeout(() => {
       addMessage(reply, "bot");
-      speak(reply); // voice reply 🔥
     }, 400);
 
     input.value = "";
