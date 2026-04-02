@@ -175,7 +175,7 @@ img {
   <input type="text" id="chat-input" placeholder="Ask something...">
 </div>
 
-<script>
+  <script>
 const btn = document.getElementById("chat-btn");
 const box = document.getElementById("chatbox");
 const input = document.getElementById("chat-input");
@@ -185,27 +185,72 @@ btn.onclick = () => {
   box.style.display = box.style.display === "none" ? "block" : "none";
 };
 
+// Random reply helper
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+// Smart reply
 function getReply(text) {
   text = text.toLowerCase();
 
-  if (text.includes("hi") || text.includes("hello"))
-    return "Hello 👋 Ask me anything about Dipanshu!";
+  if (text.includes("hi") || text.includes("hello")) {
+    return random([
+      "Hey 👋 how can I help?",
+      "Hello there 😎",
+      "Hi! Ask me anything about Dipanshu 🎹"
+    ]);
+  }
 
-  if (text.includes("dipanshu"))
-    return "Dipanshu is a talented pianist 🎹 and School Council Member.";
+  if (text.includes("dipanshu") || text.includes("who")) {
+    return random([
+      "Dipanshu is a talented pianist 🎹",
+      "He is a musician and School Council Member 😎",
+      "A passionate keyboard player who loves music 🎶"
+    ]);
+  }
 
-  if (text.includes("piano"))
-    return "He loves playing Casio keyboard 🎶";
+  if (text.includes("piano") || text.includes("music")) {
+    return random([
+      "He loves playing Casio keyboard 🎹",
+      "Music is his passion 🎶",
+      "He performs in events and shows 😏"
+    ]);
+  }
 
-  if (text.includes("contact") || text.includes("email"))
-    return "Contact: dipanshusuthar07@gmail.com 📧";
+  if (text.includes("contact") || text.includes("email")) {
+    return random([
+      "You can contact him at: dipanshusuthar07@gmail.com 📧",
+      "Reach him via email: dipanshusuthar07@gmail.com 😎",
+      "Email him here 👉 dipanshusuthar07@gmail.com"
+    ]);
+  }
 
-  if (text.includes("hire") || text.includes("concert"))
-    return "Yes! He is available for events across India 🎹";
+  if (text.includes("hire") || text.includes("concert") || text.includes("show")) {
+    return random([
+      "Yes! He is available for concerts 🎹",
+      "You can hire him for events across India 😏",
+      "Perfect for live shows and performances 🔥"
+    ]);
+  }
 
-  return "Try asking about piano, contact or skills 😊";
+  if (text.includes("skills")) {
+    return random([
+      "Keyboard 🎹, Music 🎵, Table Tennis 🏓",
+      "He is skilled in piano and sports 😎",
+      "Music + TT = perfect combo 💥"
+    ]);
+  }
+
+  // fallback replies
+  return random([
+    "Hmm 🤔 try asking about piano or contact",
+    "I am still learning 😅 ask something else",
+    "Try 'Who is Dipanshu?' or 'Contact' 😎"
+  ]);
 }
 
+// Handle input
 input.addEventListener("keypress", function(e) {
   if (e.key === "Enter") {
     let userText = input.value;
